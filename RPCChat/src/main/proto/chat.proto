@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_outer_classname = "Chat";
+
+service user {
+  rpc send (ChatMessage) returns (Empty) {}
+  rpc connect (Empty) returns (stream ChatMessage) {}
+}
+
+message ChatMessage {
+  string user = 1;
+  string time = 2;
+  string text = 3;
+}
+
+message Empty {}

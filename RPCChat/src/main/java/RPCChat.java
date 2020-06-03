@@ -15,9 +15,11 @@ public class RPCChat {
         MsgHandler handler = new ConsoleMsgHandler();
         Messager messager;
         if (ip.equals("")) {
-            messager = new RPCServer(port, handler);
+            System.out.println("Server started!");
+            messager = new RPCServer(port, username, handler);
         } else {
-            messager = new RPCClient(ip, port, handler);
+            System.out.println("Client started");
+            messager = new RPCClient(ip, port, username, handler);
         }
 
         messager.start();
