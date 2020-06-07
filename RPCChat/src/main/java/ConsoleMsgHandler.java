@@ -1,5 +1,8 @@
 import java.util.Date;
 
+/**
+ * Handler for printing messages to console
+ */
 public class ConsoleMsgHandler implements MsgHandler {
 
     @Override

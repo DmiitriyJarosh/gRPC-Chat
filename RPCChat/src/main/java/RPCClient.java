@@ -20,7 +20,7 @@ public class RPCClient implements Messager {
     private ManagedChannel channel;
     private final DateFormat formatter = new SimpleDateFormat("HH:mm:ss dd zzz yyyy", Locale.ENGLISH);
 
-    /** Construct client for accessing RPC server using a communication channel
+    /** Constructs client for accessing RPC server using a communication channel
      * (to the server), known as a Channel(they are thread-safe and reusable). It is common to create channels
      * at the beginning of application and reuse them until the application shuts down.
      */
@@ -56,7 +56,7 @@ public class RPCClient implements Messager {
     }
 
     /**
-     * Closing client.
+     * Closes client.
      */
     @Override
     public void logout() {
@@ -64,7 +64,7 @@ public class RPCClient implements Messager {
     }
 
     /**
-     * Starting the client.
+     * Starts the client.
      */
     @Override
     public void start() {
@@ -73,7 +73,7 @@ public class RPCClient implements Messager {
 
 
     /**
-     * Parsing message to preferred format: text, user, date.
+     * Parses message to preferred format: text, user, date.
      * @param msg - message to parse
      */
     private void accept(Chat.ChatMessage msg) {

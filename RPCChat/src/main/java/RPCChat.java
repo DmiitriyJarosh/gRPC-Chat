@@ -1,16 +1,28 @@
 import java.util.Scanner;
 
+/**
+ * Implementation of chat with gRPC framework
+ */
 public class RPCChat {
 
     String ip, username;
     int port;
 
+    /**
+     * Creates chat with specified parameters
+     * @param username name of user
+     * @param ip ip for connection, if provided than client mode is activated
+     * @param port port for connection
+     */
     public RPCChat(String username, String ip, int port) {
         this.ip = ip;
         this.username = username;
         this.port = port;
     }
 
+    /**
+     * Runs chat and waits for new lines from user to send
+     */
     public void run() {
         MsgHandler handler = new ConsoleMsgHandler();
         Messager messager;
