@@ -1,4 +1,5 @@
 # gRPC-Chat
+![](https://travis-ci.com/DmiitriyJarosh/gRPC-Chat.svg?branch=master)
 ## Description
 It is a small console peer-to-peer chat written with gRPC framework.
 To run you can use command `java -jar gRPCChat.jar <port> <ip>`. IP should be provided only for client mode.
