@@ -5,4 +5,4 @@ os: linux
 dist: trusty
 
 script:
-  - gradle check
+  - gradle build
