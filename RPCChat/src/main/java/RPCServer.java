@@ -7,10 +7,11 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Locale;
-import java.util.Set;
 
+/**
+ * A simple server that gets/sends a message, time and a username to the client.
+ */
 public class RPCServer implements Messager {
     private int port;
     private MsgHandler handler;
@@ -27,6 +28,10 @@ public class RPCServer implements Messager {
         this.handler = handler;
     }
 
+    /**
+     * Sends messages to client.
+     * @param msg - message to be sent.
+     */
     @Override
     public void sendMsg(String msg) {
         if (observer != null) {
@@ -38,11 +43,17 @@ public class RPCServer implements Messager {
         }
     }
 
+    /**
+     * Closes server.
+     */
     @Override
     public void logout() {
         server.shutdown();
     }
 
+    /**
+     * Starts server.
+     */
     @Override
     public void start() {
         try {
@@ -55,8 +66,16 @@ public class RPCServer implements Messager {
         }
     }
 
+    /**
+     * Class, which implements sending messages to client and receiving messages.
+     */
     class UserImpl extends userGrpc.userImplBase {
 
+        /**
+         * Sends message to the client.
+         * @param request - message to be sent.
+         * @param responseObserver - notifications from an observable stream of messages.
+         */
         @Override
         public void send(Chat.ChatMessage request, StreamObserver<Chat.Empty> responseObserver) {
             try {
@@ -69,6 +88,12 @@ public class RPCServer implements Messager {
             responseObserver.onCompleted();
         }
 
+
+        /**
+         * Connects to the client to receive messages.
+         * @param request - empty message.
+         * @param responseObserver - notifications from an observable stream of messages.
+         */
         @Override
         public void connect(Chat.Empty request, StreamObserver<Chat.ChatMessage> responseObserver) {
             synchronized (this) {

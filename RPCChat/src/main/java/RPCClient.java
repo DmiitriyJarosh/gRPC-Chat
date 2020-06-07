@@ -9,6 +9,10 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.Objects;
 
+
+/**
+ * A simple client that requests/sends a message, time and a username from the server.
+ */
 public class RPCClient implements Messager {
     private MsgHandler handler;
     private String username;
@@ -16,6 +20,10 @@ public class RPCClient implements Messager {
     private ManagedChannel channel;
     private final DateFormat formatter = new SimpleDateFormat("HH:mm:ss dd zzz yyyy", Locale.ENGLISH);
 
+    /** Construct client for accessing RPC server using a communication channel
+     * (to the server), known as a Channel(they are thread-safe and reusable). It is common to create channels
+     * at the beginning of application and reuse them until the application shuts down.
+     */
     public RPCClient(String ip, int port, String username, MsgHandler handler) {
         this.handler = handler;
         this.username = username;
@@ -24,6 +32,10 @@ public class RPCClient implements Messager {
         blockingStub = userGrpc.newBlockingStub(channel);
     }
 
+    /**
+     * Sends message to the server.
+     * @param msg - message to be sent.
+     */
     @Override
     public void sendMsg(String msg) {
         Chat.ChatMessage request = Chat.ChatMessage.newBuilder()
@@ -34,22 +46,36 @@ public class RPCClient implements Messager {
         blockingStub.send(request);
     }
 
+    /**
+     * Receives messages from RPC server.
+     */
     public void listenMsgs(){
         Iterator<Chat.ChatMessage> iterator = blockingStub.connect(Chat.Empty.getDefaultInstance());
         iterator.forEachRemaining(this::accept);
         throw new RuntimeException("Smth wrong with listenMsgs iterator");
     }
 
+    /**
+     * Closing client.
+     */
     @Override
     public void logout() {
         channel.shutdownNow();
     }
 
+    /**
+     * Starting the client.
+     */
     @Override
     public void start() {
         new Thread(this::listenMsgs).start();
     }
 
+
+    /**
+     * Parsing message to preferred format: text, user, date.
+     * @param msg - message to parse
+     */
     private void accept(Chat.ChatMessage msg) {
         if (Objects.equals(msg.getUser(), username)) return;
         try {
