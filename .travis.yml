@@ -3,7 +3,6 @@ install: true
 
 os: linux
 dist: trusty
-jdk: oraclejdk10
 
 script:
-  - ./gradlew build
+  - gradle check
