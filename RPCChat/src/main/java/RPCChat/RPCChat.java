@@ -1,3 +1,10 @@
+package RPCChat;
+
+import RPCChat.MsgHandler.ConsoleMsgHandler;
+import RPCChat.MsgHandler.MsgHandler;
+import RPCChat.client.RPCClient;
+import RPCChat.server.RPCServer;
+
 import java.util.Scanner;
 
 /**
@@ -5,13 +12,13 @@ import java.util.Scanner;
  */
 public class RPCChat {
 
-    String ip, username;
-    int port;
+    private String ip, username;
+    private int port;
 
     /**
      * Creates chat with specified parameters
      * @param username name of user
-     * @param ip ip for connection, if provided than client mode is activated
+     * @param ip ip for connection, if provided than RPCChat.client mode is activated
      * @param port port for connection
      */
     public RPCChat(String username, String ip, int port) {
@@ -36,9 +43,9 @@ public class RPCChat {
 
         messager.start();
 
-        Scanner sc = new Scanner(System.in);
+        var sc = new Scanner(System.in);
         while (true) {
-            String msg = sc.nextLine();
+            var msg = sc.nextLine();
             if (msg.equals("\\quit")) {
                 messager.logout();
                 break;
@@ -49,18 +56,18 @@ public class RPCChat {
     }
 
     public static void main(String[] args) {
-        boolean isServer = true;
+        var isServer = true;
         if (args.length != 1 && args.length != 2) {
-            System.out.println("Usage: RPCChat.jar <port> only for client: <ip>");
+            System.out.println("Usage: RPCChat.RPCChat.jar <port> only for RPCChat.client: <ip>");
         }
-        // <port> only for client: <ip>
+        // <port> only for RPCChat.client: <ip>
         if (args.length > 1) {
             isServer = false;
         }
         System.out.println("Enter username:");
-        Scanner sc = new Scanner(System.in);
+        var sc = new Scanner(System.in);
 
-        String username = sc.nextLine();
+        var username = sc.nextLine();
         int port = 0;
 
         try {
@@ -70,7 +77,7 @@ public class RPCChat {
             System.exit(-1);
         }
 
-        String ip = isServer ? "" : args[1];
+        var ip = isServer ? "" : args[1];
 
         new RPCChat(username, ip, port).run();
     }

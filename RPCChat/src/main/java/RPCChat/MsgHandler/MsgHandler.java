@@ -1,3 +1,5 @@
+package RPCChat.MsgHandler;
+
 import java.util.Date;
 
 /**

@@ -1,3 +1,5 @@
+package RPCChat;
+
 /**
  * Interface for peer-to-peer chat communication entry
  */

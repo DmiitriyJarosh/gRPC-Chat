@@ -1,3 +1,7 @@
+package RPCChat.client;
+
+import RPCChat.Messager;
+import RPCChat.MsgHandler.MsgHandler;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -9,9 +13,8 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.Objects;
 
-
 /**
- * A simple client that requests/sends a message, time and a username from the server.
+ * A simple RPCChat.client that requests/sends a message, time and a username from the RPCChat.server.
  */
 public class RPCClient implements Messager {
     private MsgHandler handler;
@@ -20,8 +23,8 @@ public class RPCClient implements Messager {
     private ManagedChannel channel;
     private final DateFormat formatter = new SimpleDateFormat("HH:mm:ss dd zzz yyyy", Locale.ENGLISH);
 
-    /** Constructs client for accessing RPC server using a communication channel
-     * (to the server), known as a Channel(they are thread-safe and reusable). It is common to create channels
+    /** Constructs RPCChat.client for accessing RPC RPCChat.server using a communication channel
+     * (to the RPCChat.server), known as a Channel(they are thread-safe and reusable). It is common to create channels
      * at the beginning of application and reuse them until the application shuts down.
      */
     public RPCClient(String ip, int port, String username, MsgHandler handler) {
@@ -33,7 +36,7 @@ public class RPCClient implements Messager {
     }
 
     /**
-     * Sends message to the server.
+     * Sends message to the RPCChat.server.
      * @param msg - message to be sent.
      */
     @Override
@@ -47,7 +50,7 @@ public class RPCClient implements Messager {
     }
 
     /**
-     * Receives messages from RPC server.
+     * Receives messages from RPC RPCChat.server.
      */
     public void listenMsgs(){
         Iterator<Chat.ChatMessage> iterator = blockingStub.connect(Chat.Empty.getDefaultInstance());
@@ -56,7 +59,7 @@ public class RPCClient implements Messager {
     }
 
     /**
-     * Closes client.
+     * Closes RPCChat.client.
      */
     @Override
     public void logout() {
@@ -64,7 +67,7 @@ public class RPCClient implements Messager {
     }
 
     /**
-     * Starts the client.
+     * Starts the RPCChat.client.
      */
     @Override
     public void start() {

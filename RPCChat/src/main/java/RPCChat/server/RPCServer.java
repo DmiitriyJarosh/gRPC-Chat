@@ -1,3 +1,7 @@
+package RPCChat.server;
+
+import RPCChat.Messager;
+import RPCChat.MsgHandler.MsgHandler;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
@@ -10,7 +14,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * A simple server that gets/sends a message, time and a username to the client.
+ * A simple RPCChat.server that gets/sends a message, time and a username to the RPCChat.client.
  */
 public class RPCServer implements Messager {
     private int port;
@@ -29,7 +33,7 @@ public class RPCServer implements Messager {
     }
 
     /**
-     * Sends messages to client.
+     * Sends messages to RPCChat.client.
      * @param msg - message to be sent.
      */
     @Override
@@ -44,7 +48,7 @@ public class RPCServer implements Messager {
     }
 
     /**
-     * Closes server.
+     * Closes RPCChat.server.
      */
     @Override
     public void logout() {
@@ -52,7 +56,7 @@ public class RPCServer implements Messager {
     }
 
     /**
-     * Starts server.
+     * Starts RPCChat.server.
      */
     @Override
     public void start() {
@@ -67,12 +71,12 @@ public class RPCServer implements Messager {
     }
 
     /**
-     * Class, which implements sending messages to client and receiving messages.
+     * Class, which implements sending messages to RPCChat.client and receiving messages.
      */
     class UserImpl extends userGrpc.userImplBase {
 
         /**
-         * Sends message to the client.
+         * Sends message to the RPCChat.client.
          * @param request - message to be sent.
          * @param responseObserver - notifications from an observable stream of messages.
          */
@@ -90,7 +94,7 @@ public class RPCServer implements Messager {
 
 
         /**
-         * Connects to the client to receive messages.
+         * Connects to the RPCChat.client to receive messages.
          * @param request - empty message.
          * @param responseObserver - notifications from an observable stream of messages.
          */
