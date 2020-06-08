@@ -4,7 +4,7 @@
 It is a small console peer-to-peer chat written with gRPC framework.
 To run you can use command `java -jar RPCChat.jar <port> <ip>`. IP should be provided only for client mode.
 ## Build
-To build chat from source enter `gradle wrapper && ./gradlew installDist` in RPCChat directory.
+To build chat from source run `gradle wrapper && ./gradlew installDist` in RPCChat directory.
 ## Example
 ![](https://github.com/DmiitriyJarosh/gRPC-Chat/raw/master/example.png)
 
